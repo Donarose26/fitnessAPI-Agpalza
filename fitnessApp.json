@@ -1,0 +1,11 @@
+{
+    "endpoints": {
+        "login":"/login",
+        "register":"/register",
+        "addWorkout": "/addWorkout",
+        "getMyWorkouts":"/getMyWorkouts",
+        "updateWorkout":"/updateWorkout/:id",
+        "deleteWorkout":"/deleteWorkout/:id",
+        "completeWorkoutStatus":"/completeWorkoutStatus/:id"
+    }
+}
