@@ -65,6 +65,9 @@ module.exports.loginUser = (req,res) => {
       return res.status(400).send(false)
   }
 };
+module.exports.logoutUser = (req, res) => {
+  return res.status(200).send({ message: "Logged out successfully" });
+};
 
 module.exports.getUserDetails = async (req, res) => {
   try {
