@@ -9,6 +9,10 @@ const workoutSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Workout name is required']
   },
+   type: {
+    type: String,
+    required: [true, 'Workout type is required']
+  },
   duration: {
     type: String,
     required: [true, 'Duration is required']
