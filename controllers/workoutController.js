@@ -7,6 +7,7 @@ module.exports.addWorkout = (req, res) => {
     let newWorkout = new Workout({
         userId : req.user.id,
         name : req.body.name,
+        type : req.body.type,
         duration : req.body.duration,
         status : req.body.status
     });
@@ -49,6 +50,7 @@ module.exports.getMyWorkouts = (req, res) => {
 module.exports.updateWorkout = (req, res) => {
     let updatedWorkout = {
         userId: req.user.id,
+        type : req.body.type,
         name: req.body.name,
         duration: req.body.duration,
         status: req.body.status
