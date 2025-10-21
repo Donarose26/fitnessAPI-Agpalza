@@ -15,33 +15,37 @@ module.exports.createAccessToken = (user) => {
 
 
 module.exports.verify = (req, res, next) => {
+    console.log(req.headers.authorization);
+
     let token = req.headers.authorization;
 
-    if (!token) {
-        // No token at all
-        return res.status(401).send({
-            auth: "Failed",
-            message: "Please register first"
-        });
+    if(typeof token === "undefined"){
+        return res.send({ auth: "Failed. No Token" });
+    } else {
+        console.log(token);
+     
+        token = token.slice(7, token.length);
+        console.log(token);
+
+
+        jwt.verify(token, JWT_SECRET_KEY, function(err, decodedToken){
+            if(err) {
+                return res.status(403).send({
+                    auth: "Failed",
+                    message: err.message
+                });
+            } else {
+                console.log("Result from verify method:")
+                console.log(decodedToken);
+
+                req.user = decodedToken;
+
+                next();
+            }
+        })
+
     }
-
-    // Remove "Bearer " prefix
-    token = token.slice(7); // slice from index 7 to the end
-
-    jwt.verify(token, JWT_SECRET_KEY, (err, decodedToken) => {
-        if (err) {
-            // Token invalid or expired
-            return res.status(403).send({
-                auth: "Failed",
-                message: "Please register first"
-            });
-        }
-
-        // Valid token, attach user to request
-        req.user = decodedToken;
-        next();
-    });
-};
+}
 
 
 
